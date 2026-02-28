@@ -8,7 +8,7 @@
   "rsu": 950000,
   "stockOption": "",
   "bonus": "20% performance-based",
-  "remote": true,
+  "remote": "hybrid",
   "city": "Toronto",
   "country": "Canada",
   "address": "123 Main St, Toronto, ON M5A 0J5",

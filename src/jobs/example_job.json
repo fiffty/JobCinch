@@ -8,7 +8,7 @@
   "rsu": 200000,
   "stockOption": "0.10% - 0.50%",
   "bonus": "10% annual target",
-  "remote": true,
+  "remote": "full",
   "city": "San Francisco",
   "country": "USA",
   "address": "123 Main St, San Francisco, CA 94105",

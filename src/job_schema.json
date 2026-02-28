@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/job-posting.schema.json",
+  "title": "Job Posting",
+  "description": "Schema for a job application tracking entry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique kebab-case identifier for the job"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "jobTitle": {
+      "type": "string",
+      "description": "Job title / role"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code (e.g. USD, CAD)"
+    },
+    "salaryMin": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Minimum base salary"
+    },
+    "salaryMax": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Maximum base salary"
+    },
+    "rsu": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Expected monetary value of RSU"
+    },
+    "stockOption": {
+      "type": "string",
+      "description": "Stock option details (e.g. percentage range)"
+    },
+    "bonus": {
+      "type": "string",
+      "description": "Bonus structure description"
+    },
+    "remote": {
+      "oneOf": [
+        { "type": "boolean" },
+        { "type": "string", "enum": ["full", "hybrid", "on-site"] }
+      ],
+      "description": "Remote work policy (boolean or policy type)"
+    },
+    "city": {
+      "type": "string",
+      "description": "Primary office city"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country"
+    },
+    "address": {
+      "type": "string",
+      "description": "Full office address"
+    },
+    "visaSponsorship": {
+      "type": "boolean",
+      "description": "Whether the company sponsors visas"
+    },
+    "companyDescription": {
+      "type": "string",
+      "description": "Company overview"
+    },
+    "teamDescription": {
+      "type": "string",
+      "description": "Team overview and context"
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of job responsibilities"
+    },
+    "perks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Benefits and perks"
+    },
+    "referrer": {
+      "type": "object",
+      "description": "Person who referred you (if applicable)",
+      "properties": {
+        "name": { "type": "string" },
+        "link": { "type": "string", "format": "uri" },
+        "conversationSummary": { "type": "string" }
+      }
+    },
+    "pointOfContact": {
+      "type": "object",
+      "description": "Primary recruiter or hiring manager",
+      "properties": {
+        "name": { "type": "string" },
+        "link": { "type": "string", "format": "uri" },
+        "conversationSummary": { "type": "string" }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Application pipeline status",
+      "properties": {
+        "appliedAt": {
+          "type": "string",
+          "description": "Date applied (YYYY-MM-DD)"
+        },
+        "introCallAt": { "type": "string", "description": "Intro call date" },
+        "interviewsAt": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Interview dates"
+        },
+        "receivedOfferAt": {
+          "type": "string",
+          "description": "Offer date (empty if none)"
+        }
+      }
+    }
+  }
+}
