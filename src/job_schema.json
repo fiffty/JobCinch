@@ -17,6 +17,11 @@
       "type": "string",
       "description": "Job title / role"
     },
+    "link": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the job posting"
+    },
     "currency": {
       "type": "string",
       "description": "ISO 4217 currency code (e.g. USD, CAD)"

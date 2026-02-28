@@ -2,6 +2,7 @@
   "id": "acme-senior-software-engineer",
   "company": "Acme",
   "jobTitle": "Senior Software Engineer",
+  "link": "https://careers.acme.com/jobs/senior-software-engineer",
   "currency": "USD",
   "salaryMin": 120000,
   "salaryMax": 180000,
