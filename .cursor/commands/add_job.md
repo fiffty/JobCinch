@@ -1,12 +1,13 @@
 The user wants to add a new job to track. They will provide a job posting URL.
 
-1. Visit the provided URL and extract all relevant job information.
-2. Create a new JSON file in `src/jobs/` that conforms to `src/job_schema.json`.
-3. Use `src/jobs/example_job.json` as a formatting reference.
-4. Name the file using the pattern: `{company}-{job-title}.json` (lowercase, hyphenated). If a file with that name already exists, append `-2`, `-3`, etc. (e.g. `acme-senior-engineer-2.json`).
-5. Confirm the file path and briefly summarize what was extracted (company, role, salary range if any).
+1. First, run `bun run scrape <url>` (where `<url>` is the provided job posting URL) to extract the page content. Use the scraped output as your primary source of job information.
+2. If the scrape script fails or returns unusable output, fall back to visiting the URL directly to extract job information.
+3. Create a new JSON file in `src/jobs/` that conforms to `src/job_schema.json`.
+4. Use `src/jobs/example_job.json` as a formatting reference.
+5. Name the file using the pattern: `{company}-{job-title}.json` (lowercase, hyphenated). If a file with that name already exists, append `-2`, `-3`, etc. (e.g. `acme-senior-engineer-2.json`).
+6. Confirm the file path and briefly summarize what was extracted (company, role, salary range if any).
 
-If the URL cannot be accessed or the content cannot be reliably extracted, ask the user to paste key details (company, title, salary, etc.) or provide an alternative source.
+If neither the scrape script nor direct URL access yields reliable content, ask the user to paste key details (company, title, salary, etc.) or provide an alternative source.
 
 ## Schema reference
 
