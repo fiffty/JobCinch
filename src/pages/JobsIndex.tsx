@@ -6,7 +6,7 @@ import {
   flexRender,
   type SortingState,
 } from '@tanstack/react-table';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLocation } from 'wouter';
 import { useJobStore } from '../store/jobStore';
 import { useCurrencyStore, formatSalary } from '../store/currencyStore';
@@ -44,10 +44,102 @@ function formatSalaryCell(value: number, job: Job, displayCurrency: string | nul
 
 const columnHelper = createColumnHelper<Job>();
 
+function ExchangeRateModal({
+  targetCurrency,
+  currencies,
+  exchangeRates,
+  onSave,
+  onCancel,
+}: {
+  targetCurrency: string;
+  currencies: string[];
+  exchangeRates: Record<string, Record<string, number>>;
+  onSave: (rates: Record<string, Record<string, number>>) => void;
+  onCancel: () => void;
+}) {
+  const [draft, setDraft] = useState<Record<string, Record<string, number>>>(() => {
+    // Deep clone existing rates as starting point
+    const clone: Record<string, Record<string, number>> = {};
+    for (const from of Object.keys(exchangeRates)) {
+      clone[from] = { ...exchangeRates[from] };
+    }
+    return clone;
+  });
+
+  // Only show pairs that convert *to* the target currency
+  const pairs = useMemo(() => {
+    return currencies
+      .filter((c) => c !== targetCurrency)
+      .map((c) => [c, targetCurrency] as [string, string]);
+  }, [currencies, targetCurrency]);
+
+  const allFilled = pairs.every(([from, to]) => {
+    const rate = draft[from]?.[to];
+    return rate !== undefined && rate > 0;
+  });
+
+  const updateDraft = (from: string, to: string, rate: number) => {
+    setDraft((prev) => {
+      const next = { ...prev };
+      if (!next[from]) next[from] = {};
+      next[from] = { ...next[from], [to]: rate };
+      // Auto-compute inverse
+      if (!next[to]) next[to] = {};
+      next[to] = { ...next[to], [from]: Math.round((1 / rate) * 10000) / 10000 };
+      return next;
+    });
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onCancel}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h3>Set Exchange Rates for {targetCurrency}</h3>
+        <p className="modal-description">
+          Enter exchange rates to convert salaries to {targetCurrency}.
+        </p>
+        <div className="exchange-rates-inputs">
+          {pairs.map(([from, to]) => (
+            <div key={`${from}-${to}`} className="exchange-rate-row">
+              <label>
+                1 {from} ={' '}
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="rate"
+                  value={draft[from]?.[to] ?? ''}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    if (!isNaN(val) && val > 0) {
+                      updateDraft(from, to, val);
+                    }
+                  }}
+                />{' '}
+                {to}
+              </label>
+            </div>
+          ))}
+        </div>
+        <div className="modal-actions">
+          <button className="modal-btn cancel" onClick={onCancel}>Cancel</button>
+          <button
+            className="modal-btn save"
+            disabled={!allFilled}
+            onClick={() => onSave(draft)}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function JobsIndex() {
   const jobs = useJobStore((state) => state.jobs);
   const [, setLocation] = useLocation();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [modalTarget, setModalTarget] = useState<string | null>(null);
 
   const {
     currencies,
@@ -56,7 +148,7 @@ export default function JobsIndex() {
     setExchangeRate,
     displayCurrency,
     setDisplayCurrency,
-    allRatesAvailable,
+    hasRatesForCurrency,
     convertSalary,
   } = useCurrencyStore();
 
@@ -65,15 +157,40 @@ export default function JobsIndex() {
     setCurrencies(unique);
   }, [jobs, setCurrencies]);
 
-  const currencyPairs = useMemo(() => {
-    const pairs: [string, string][] = [];
-    for (let i = 0; i < currencies.length; i++) {
-      for (let j = i + 1; j < currencies.length; j++) {
-        pairs.push([currencies[i], currencies[j]]);
+  const handleCurrencyClick = useCallback(
+    (currency: string | null) => {
+      if (currency === null) {
+        setDisplayCurrency(null);
+        return;
       }
-    }
-    return pairs;
-  }, [currencies]);
+      if (hasRatesForCurrency(currency)) {
+        setDisplayCurrency(currency);
+      } else {
+        setModalTarget(currency);
+      }
+    },
+    [hasRatesForCurrency, setDisplayCurrency],
+  );
+
+  const handleModalSave = useCallback(
+    (draft: Record<string, Record<string, number>>) => {
+      // Persist all draft rates to the store
+      for (const from of Object.keys(draft)) {
+        for (const to of Object.keys(draft[from])) {
+          setExchangeRate(from, to, draft[from][to]);
+        }
+      }
+      if (modalTarget) {
+        setDisplayCurrency(modalTarget);
+      }
+      setModalTarget(null);
+    },
+    [modalTarget, setExchangeRate, setDisplayCurrency],
+  );
+
+  const handleModalCancel = useCallback(() => {
+    setModalTarget(null);
+  }, []);
 
   const columns = useMemo(
     () => [
@@ -116,66 +233,16 @@ export default function JobsIndex() {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const ratesAvailable = allRatesAvailable();
-
   return (
     <div className="app">
       <h1>Job Tracker</h1>
 
-      {currencyPairs.length > 0 && (
-        <div className="exchange-rates-section">
-          <h3>Exchange Rates</h3>
-          <div className="exchange-rates-inputs">
-            {currencyPairs.map(([a, b]) => (
-              <div key={`${a}-${b}`} className="exchange-rate-row">
-                <label>
-                  1 {a} ={' '}
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    placeholder="rate"
-                    value={exchangeRates[a]?.[b] ?? ''}
-                    onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (!isNaN(val) && val > 0) {
-                        setExchangeRate(a, b, val);
-                        setExchangeRate(b, a, Math.round((1 / val) * 10000) / 10000);
-                      }
-                    }}
-                  />{' '}
-                  {b}
-                </label>
-                <label>
-                  1 {b} ={' '}
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    placeholder="rate"
-                    value={exchangeRates[b]?.[a] ?? ''}
-                    onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (!isNaN(val) && val > 0) {
-                        setExchangeRate(b, a, val);
-                        setExchangeRate(a, b, Math.round((1 / val) * 10000) / 10000);
-                      }
-                    }}
-                  />{' '}
-                  {a}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {ratesAvailable && currencies.length > 1 && (
+      {currencies.length > 1 && (
         <div className="currency-toggle">
           <span>Display currency:</span>
           <button
             className={displayCurrency === null ? 'active' : ''}
-            onClick={() => setDisplayCurrency(null)}
+            onClick={() => handleCurrencyClick(null)}
           >
             Native
           </button>
@@ -183,12 +250,22 @@ export default function JobsIndex() {
             <button
               key={c}
               className={displayCurrency === c ? 'active' : ''}
-              onClick={() => setDisplayCurrency(c)}
+              onClick={() => handleCurrencyClick(c)}
             >
               {c}
             </button>
           ))}
         </div>
+      )}
+
+      {modalTarget && (
+        <ExchangeRateModal
+          targetCurrency={modalTarget}
+          currencies={currencies}
+          exchangeRates={exchangeRates}
+          onSave={handleModalSave}
+          onCancel={handleModalCancel}
+        />
       )}
 
       <table>

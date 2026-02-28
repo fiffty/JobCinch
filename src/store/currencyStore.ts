@@ -32,6 +32,7 @@ interface CurrencyStore {
   setExchangeRate: (from: string, to: string, rate: number) => void;
   setDisplayCurrency: (currency: string | null) => void;
   allRatesAvailable: () => boolean;
+  hasRatesForCurrency: (target: string) => boolean;
   convertSalary: (amount: number, fromCurrency: string, toCurrency: string) => number;
 }
 
@@ -62,6 +63,15 @@ export const useCurrencyStore = create<CurrencyStore>((set, get) => ({
         if (from === to) continue;
         if (!exchangeRates[from]?.[to]) return false;
       }
+    }
+    return true;
+  },
+
+  hasRatesForCurrency: (target) => {
+    const { currencies, exchangeRates } = get();
+    for (const from of currencies) {
+      if (from === target) continue;
+      if (!exchangeRates[from]?.[target]) return false;
     }
     return true;
   },
