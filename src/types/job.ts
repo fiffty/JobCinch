@@ -13,6 +13,7 @@ export interface JobStatus {
 
 export interface Job {
   id: string;
+  link: string;
   company: string;
   jobTitle: string;
   currency: string;
@@ -24,12 +25,13 @@ export interface Job {
   remote: boolean;
   city: string;
   country: string;
-  address: string;
+  address: string[];
   visaSponsorship: boolean;
   companyDescription: string;
   teamDescription: string;
   responsibilities: string[];
   perks: string[];
+  keyAttributes: string[];
   referrer: ContactInfo;
   pointOfContact: ContactInfo;
   status: JobStatus;

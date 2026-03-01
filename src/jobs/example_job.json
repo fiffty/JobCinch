@@ -12,7 +12,7 @@
   "remote": "full",
   "city": "San Francisco",
   "country": "USA",
-  "address": "123 Main St, San Francisco, CA 94105",
+  "address": ["123 Main St, San Francisco, CA 94105"],
   "visaSponsorship": false,
   "companyDescription": "Acme Corp is a leading technology company focused on building innovative solutions for the modern web. We've been at the forefront of cloud computing and distributed systems for over a decade.",
   "teamDescription": "Join our small, agile engineering team of 8 developers. We work in a collaborative environment where everyone's input is valued. The team is responsible for building and maintaining our core platform.",
@@ -30,6 +30,13 @@
     "Remote work flexibility",
     "Annual learning and development budget",
     "Top-tier equipment and home office setup"
+  ],
+  "keyAttributes": [
+    "5+ years of backend experience with Node.js and TypeScript (essential)",
+    "Experience with distributed systems and microservices (essential)",
+    "Strong SQL and database optimization skills (essential)",
+    "Mentorship and code review experience (nice to have)",
+    "Familiarity with cloud platforms (AWS/GCP) (nice to have)"
   ],
   "referrer": {
     "name": "John Doe",

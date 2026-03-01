@@ -65,8 +65,9 @@
       "description": "Country"
     },
     "address": {
-      "type": "string",
-      "description": "Full office address"
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Full office address(es)"
     },
     "visaSponsorship": {
       "type": "boolean",
@@ -89,6 +90,11 @@
       "type": "array",
       "items": { "type": "string" },
       "description": "Benefits and perks"
+    },
+    "keyAttributes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Key qualifications, skills, or requirements from the posting. Append '(essential)' or '(nice to have)' if the posting indicates priority."
     },
     "referrer": {
       "type": "object",

@@ -20,9 +20,10 @@ Populate every field you can from the job posting. For fields not found in the p
 - **stockOption / bonus**: Use values from posting, or `""` if not listed
 - **remote**: Use `"full"` if fully remote, `"hybrid"` if hybrid, `"on-site"` if onsite only, or `false` if unclear
 - **visaSponsorship**: `false` unless explicitly stated
-- **city / country / address**: Extract when given; leave `""` if not found
+- **city / country / address**: Extract from the posting. If the office address is not in the posting, search the internet for the company's office address (prioritize the office nearest to the listed city). `address` is an array of strings—include multiple addresses if the company has several relevant offices. Use `[]` if no address is found
 - **companyDescription / teamDescription**: Extract from the posting; leave `""` if absent
 - **responsibilities / perks**: Use arrays of strings from the posting; use `[]` if absent
+- **keyAttributes**: Extract key qualifications, skills, and requirements. Append `(essential)` if the posting marks them as required/must-have, or `(nice to have)` if marked as preferred/bonus/plus. Leave untagged if the posting doesn't indicate priority. Use `[]` if absent
 - **referrer / pointOfContact**: Set both to `{ "name": "", "link": "", "conversationSummary": "" }`
 - **status**: Leave all fields empty unless user says otherwise.
 

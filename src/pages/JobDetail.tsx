@@ -58,6 +58,8 @@ export default function JobDetail() {
         {job.jobTitle} @ {job.company}
       </h1>
 
+      <Link href={job.link}>View job posting</Link>
+
       <section>
         <h2>Status Timeline</h2>
         <dl>
@@ -84,9 +86,18 @@ export default function JobDetail() {
           <dt>Salary</dt>
           <dd>
             {(() => {
-              const curr = displayCurrency && displayCurrency !== job.currency ? displayCurrency : job.currency;
-              const min = displayCurrency && displayCurrency !== job.currency ? convertSalary(job.salaryMin, job.currency, displayCurrency) : job.salaryMin;
-              const max = displayCurrency && displayCurrency !== job.currency ? convertSalary(job.salaryMax, job.currency, displayCurrency) : job.salaryMax;
+              const curr =
+                displayCurrency && displayCurrency !== job.currency
+                  ? displayCurrency
+                  : job.currency;
+              const min =
+                displayCurrency && displayCurrency !== job.currency
+                  ? convertSalary(job.salaryMin, job.currency, displayCurrency)
+                  : job.salaryMin;
+              const max =
+                displayCurrency && displayCurrency !== job.currency
+                  ? convertSalary(job.salaryMax, job.currency, displayCurrency)
+                  : job.salaryMax;
               return `${curr} ${getCurrencySymbol(curr)}${min.toLocaleString()} – ${getCurrencySymbol(curr)}${max.toLocaleString()}`;
             })()}
           </dd>
@@ -117,7 +128,17 @@ export default function JobDetail() {
           {job.city}, {job.country}
           {job.remote && " (Remote)"}
         </p>
-        <p>{job.address}</p>
+        {job.address.map((addr, i) => (
+          <p key={i}>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {addr}
+            </a>
+          </p>
+        ))}
         <p>Visa Sponsorship: {job.visaSponsorship ? "Yes" : "No"}</p>
       </section>
 
@@ -148,6 +169,17 @@ export default function JobDetail() {
           ))}
         </ul>
       </section>
+
+      {job.keyAttributes.length > 0 && (
+        <section>
+          <h2>Key Attributes</h2>
+          <ul>
+            {job.keyAttributes.map((attr, i) => (
+              <li key={i}>{attr}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section>
         <h2>People</h2>
