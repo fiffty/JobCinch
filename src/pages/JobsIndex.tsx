@@ -13,6 +13,7 @@ import { useLocation } from 'wouter';
 import { useJobStore } from '../store/jobStore';
 import { useCurrencyStore, formatSalary } from '../store/currencyStore';
 import type { Job } from '../types/job';
+import InfoCard from '../components/InfoCard';
 
 function isPast(dateStr: string): boolean {
   return new Date(dateStr + 'T00:00:00') <= new Date();
@@ -299,6 +300,13 @@ export default function JobsIndex() {
           exchangeRates={exchangeRates}
           onSave={handleModalSave}
           onCancel={handleModalCancel}
+        />
+      )}
+
+      {jobs.length === 0 && (
+        <InfoCard
+          message="No jobs tracked yet. Add a job posting link to start tracking."
+          command="/add_job"
         />
       )}
 

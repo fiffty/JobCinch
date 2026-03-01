@@ -210,6 +210,33 @@
   margin-bottom: 0.1rem;
 }
 
+.info-card {
+  border: 1px dashed #3a3a3a;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.info-card-message {
+  margin: 0 0 0.5rem;
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.info-card-hint {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.info-card-command {
+  font-size: 0.85rem;
+  background: rgba(100, 108, 255, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  color: #646cff;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -566,6 +593,18 @@ input.editable-date {
 }
 
 @media (prefers-color-scheme: light) {
+  .info-card {
+    border-color: #e0e0e0;
+  }
+
+  .info-card-message {
+    color: #666;
+  }
+
+  .info-card-hint {
+    color: #777;
+  }
+
   .resume-list-item {
     border-color: #e0e0e0;
   }

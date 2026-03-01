@@ -1,5 +1,6 @@
 import { useLocation } from 'wouter';
 import { useResumeStore } from '../store/resumeStore';
+import InfoCard from '../components/InfoCard';
 
 export default function ResumesIndex() {
   const resumes = useResumeStore((state) => state.resumes);
@@ -9,9 +10,21 @@ export default function ResumesIndex() {
     <div className="app">
       <h1>Resumes</h1>
 
-      {resumes.length === 0 ? (
-        <p>No resumes found.</p>
-      ) : (
+      {resumes.length === 0 && (
+        <InfoCard
+          message="No resumes yet. Create your master resume to get started."
+          command="/update_master_resume"
+        />
+      )}
+
+      {resumes.length > 0 && resumes.length < 5 && (
+        <InfoCard
+          message="Create a resume tailored to a specific job posting."
+          command="/create_job_resume"
+        />
+      )}
+
+      {resumes.length === 0 ? null : (
         <ul className="resumes-list">
           {resumes.map((resume) => {
             const title = resume.metaTitle || resume.name || resume.id || 'Untitled Resume';
