@@ -22,7 +22,7 @@ export interface Job {
   rsu: number;
   stockOption: string;
   bonus: string;
-  remote: boolean;
+  remote: string;
   city: string;
   country: string;
   address: string[];

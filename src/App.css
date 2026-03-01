@@ -398,6 +398,22 @@ tbody td {
   color: #fff;
 }
 
+.filters-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.filters-row select {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: light) {
   .resume-list-item {
     border-color: #e0e0e0;
@@ -445,6 +461,10 @@ tbody td {
   }
 
   .currency-toggle button {
+    border-color: #ccc;
+  }
+
+  .filters-row select {
     border-color: #ccc;
   }
 

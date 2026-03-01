@@ -3,8 +3,10 @@ import {
   useReactTable,
   getCoreRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
   flexRender,
   type SortingState,
+  type ColumnFiltersState,
 } from '@tanstack/react-table';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLocation } from 'wouter';
@@ -139,6 +141,7 @@ export default function JobsIndex() {
   const jobs = useJobStore((state) => state.jobs);
   const [, setLocation] = useLocation();
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [modalTarget, setModalTarget] = useState<string | null>(null);
 
   const {
@@ -208,17 +211,20 @@ export default function JobsIndex() {
       }),
       columnHelper.accessor('remote', {
         header: 'Remote',
-        cell: (info) => (info.getValue() ? 'Yes' : 'No'),
+        cell: (info) => {
+          const v = info.getValue();
+          return v ? v.charAt(0).toUpperCase() + v.slice(1) : '';
+        },
       }),
       columnHelper.accessor('visaSponsorship', {
         header: 'Visa Sponsor',
         cell: (info) => (info.getValue() ? 'Yes' : 'No'),
       }),
       columnHelper.accessor('city', { header: 'City' }),
-      columnHelper.display({
+      columnHelper.accessor('country', { header: 'Country' }),
+      columnHelper.accessor((row) => getStatusLabel(row.status), {
         id: 'status',
         header: 'Status',
-        cell: (info) => getStatusLabel(info.row.original.status),
       }),
     ],
     [displayCurrency, convertSalary],
@@ -227,11 +233,23 @@ export default function JobsIndex() {
   const table = useReactTable({
     data: jobs,
     columns,
-    state: { sorting },
+    state: { sorting, columnFilters },
     onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
+
+  const uniqueValues = useMemo(() => {
+    const collect = (fn: (j: Job) => string) => [...new Set(jobs.map(fn))].filter(Boolean).sort();
+    return {
+      city: collect((j) => j.city),
+      remote: collect((j) => j.remote),
+      country: collect((j) => j.country),
+      status: collect((j) => getStatusLabel(j.status)),
+    };
+  }, [jobs]);
 
   return (
     <div className="app">
@@ -267,6 +285,30 @@ export default function JobsIndex() {
           onCancel={handleModalCancel}
         />
       )}
+
+      <div className="filters-row">
+        {(['city', 'remote', 'country', 'status'] as const).map((key) => (
+          <select
+            key={key}
+            value={(columnFilters.find((f) => f.id === key)?.value as string) ?? ''}
+            onChange={(e) => {
+              const val = e.target.value;
+              setColumnFilters((prev) =>
+                val
+                  ? [...prev.filter((f) => f.id !== key), { id: key, value: val }]
+                  : prev.filter((f) => f.id !== key),
+              );
+            }}
+          >
+            <option value="">All {key.charAt(0).toUpperCase() + key.slice(1)}</option>
+            {uniqueValues[key].map((v) => (
+              <option key={v} value={v}>
+                {v}
+              </option>
+            ))}
+          </select>
+        ))}
+      </div>
 
       <table>
         <thead>
