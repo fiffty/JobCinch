@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .claude/worktrees
+src/jobs/*.json
+src/resumes/*.json

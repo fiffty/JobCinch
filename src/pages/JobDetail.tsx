@@ -249,7 +249,7 @@ export default function JobDetail() {
         </ul>
       </section>
 
-      {job.keyAttributes.length > 0 && (
+      {(job.keyAttributes?.length ?? 0) > 0 && (
         <section>
           <h2>Key Attributes</h2>
           <ul>
