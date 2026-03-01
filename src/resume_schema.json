@@ -100,7 +100,6 @@
         "country": { "type": "string" },
         "remote": {
           "oneOf": [
-            { "type": "boolean" },
             { "type": "string", "enum": ["full", "hybrid", "on-site"] }
           ],
           "description": "Open to remote work"

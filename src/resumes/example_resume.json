@@ -85,7 +85,7 @@
       "endDate": "2022-02",
       "city": "New York",
       "country": "USA",
-      "remote": true,
+      "remote": "full",
       "description": "Built platform capabilities for merchant checkout and internal tooling.",
       "impactEntries": [
         {

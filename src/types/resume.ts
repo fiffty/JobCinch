@@ -1,4 +1,4 @@
-export type RemotePreference = boolean | "full" | "hybrid" | "on-site";
+export type RemotePreference = "full" | "hybrid" | "on-site";
 
 export interface LinkItem {
   label?: string;
