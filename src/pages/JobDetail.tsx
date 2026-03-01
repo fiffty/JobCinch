@@ -4,16 +4,6 @@ import { useJobStore } from "../store/jobStore";
 import { useCurrencyStore, getCurrencySymbol } from "../store/currencyStore";
 import type { ContactInfo, JobStatus } from "../types/job";
 
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr + "T00:00:00");
-  return date.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
 function EditableDate({
   value,
   onChange,
@@ -79,14 +69,16 @@ export default function JobDetail() {
   };
 
   const updateInterview = (index: number, value: string) => {
-    const updated = status.interviewsAt.map((d, i) => (i === index ? value : d));
+    const updated = status.interviewsAt.map((d, i) =>
+      i === index ? value : d,
+    );
     updateField("interviewsAt", updated);
   };
 
   const removeInterview = (index: number) => {
     updateField(
       "interviewsAt",
-      status.interviewsAt.filter((_, i) => i !== index)
+      status.interviewsAt.filter((_, i) => i !== index),
     );
   };
 
@@ -98,7 +90,9 @@ export default function JobDetail() {
         {job.jobTitle} @ {job.company}
       </h1>
 
-      <Link href={job.link}>View job posting</Link>
+      <a href={job.link} target="_blank" rel="noopener noreferrer">
+        View job posting
+      </a>
 
       <section>
         <h2>Status Timeline</h2>
