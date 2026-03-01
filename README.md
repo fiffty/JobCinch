@@ -1,3 +1,5 @@
+![job_cinch_hero](https://github.com/user-attachments/assets/dbf06580-7850-41ab-9faf-050ac8afe23e)
+
 # JobCinch
 
 JobCinch is an AI-powered tool for job seekers that combines job tracking with resume building. Drop a link to a job posting and JobCinch will parse and save it, letting you manage your applications and track their status in one place. For resumes, import your existing resume to build a master profile that accumulates all your experience, then use AI to generate tailored resumes optimized for specific job postings.
