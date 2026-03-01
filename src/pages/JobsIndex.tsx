@@ -36,6 +36,13 @@ function getStatusLabel(status: Job['status']): string {
   return 'Not Applied';
 }
 
+const preferenceLabels: Record<number, string> = {
+  1: 'Low',
+  2: 'Medium',
+  3: 'High',
+  4: 'Very High',
+};
+
 function formatSalaryCell(value: number, job: Job, displayCurrency: string | null, convertSalary: (amount: number, from: string, to: string) => number): string {
   if (displayCurrency && displayCurrency !== job.currency) {
     const converted = convertSalary(value, job.currency, displayCurrency);
@@ -225,6 +232,11 @@ export default function JobsIndex() {
       columnHelper.accessor('referrer', {
         header: 'Referrer',
         cell: (info) => info.getValue()?.name ?? '',
+      }),
+      columnHelper.accessor('preference', {
+        header: 'Preference',
+        cell: (info) => preferenceLabels[info.getValue()] ?? '',
+        enableSorting: true,
       }),
       columnHelper.accessor((row) => getStatusLabel(row.status), {
         id: 'status',

@@ -34,5 +34,6 @@ export interface Job {
   keyAttributes: string[];
   referrer: ContactInfo;
   pointOfContact: ContactInfo;
+  preference: number;
   status: JobStatus;
 }

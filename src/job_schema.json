@@ -112,6 +112,12 @@
         "conversationSummary": { "type": "string" }
       }
     },
+    "preference": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Preference level: 1 = low, 2 = medium, 3 = high, 4 = very high"
+    },
     "status": {
       "type": "object",
       "description": "Application pipeline status",

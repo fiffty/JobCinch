@@ -25,6 +25,7 @@ Populate every field you can from the job posting. For fields not found in the p
 - **responsibilities / perks**: Use arrays of strings from the posting; use `[]` if absent
 - **keyAttributes**: Extract key qualifications, skills, and requirements. Append `(essential)` if the posting marks them as required/must-have, or `(nice to have)` if marked as preferred/bonus/plus. Leave untagged if the posting doesn't indicate priority. Use `[]` if absent
 - **referrer / pointOfContact**: Set both to `{ "name": "", "link": "", "conversationSummary": "" }`
+- **preference**: Use the value provided by the user (1 = low, 2 = medium, 3 = high, 4 = very high). If not provided, ask the user for their preference level before creating the file.
 - **status**: Leave all fields empty unless user says otherwise.
 
 ## Input

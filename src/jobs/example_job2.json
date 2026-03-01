@@ -48,6 +48,7 @@
     "link": "https://holonet.nebula/commander-jax",
     "conversationSummary": "Jax is the Fleet Lead for Warp-Speed Data. He emphasized they need someone who can navigate complex temporal anomalies in code and isn't afraid of black-hole-scale data migrations."
   },
+  "preference": 4,
   "status": {
     "appliedAt": "2026-02-15",
     "introCallAt": "2026-02-22",

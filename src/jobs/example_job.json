@@ -48,6 +48,7 @@
     "link": "https://linkedin.com/in/janesmith",
     "conversationSummary": "Jane is the engineering manager for the platform team. She emphasized the focus on developer experience and clean architecture."
   },
+  "preference": 3,
   "status": {
     "appliedAt": "2026-01-15",
     "introCallAt": "2026-01-22",
