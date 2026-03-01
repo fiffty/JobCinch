@@ -42,7 +42,13 @@
           "result": "Increased 30-day activation and reduced setup abandonment.",
           "metric": "+14% activation, -22% onboarding drop-off over 2 quarters",
           "scope": "Core onboarding used by ~120k new users/year",
-          "skills": ["TypeScript", "React", "Node.js", "A/B Testing", "Product Analytics"],
+          "skills": [
+            "TypeScript",
+            "React",
+            "Node.js",
+            "A/B Testing",
+            "Product Analytics"
+          ],
           "links": ["https://alexkim.dev/case-study-onboarding"]
         },
         {
@@ -51,14 +57,26 @@
           "result": "Improved dashboard responsiveness and reliability.",
           "metric": "-61% p95 latency, +9 points customer satisfaction",
           "scope": "Served 40k daily active users across 3 regions",
-          "skills": ["PostgreSQL", "Redis", "Performance Tuning", "Observability"]
+          "skills": [
+            "PostgreSQL",
+            "Redis",
+            "Performance Tuning",
+            "Observability"
+          ]
         }
       ],
       "highlights": [
         "Mentored 5 engineers and created a technical design review rubric adopted by two teams.",
         "Partnered with design and PM to define quarterly roadmap for growth platform."
       ],
-      "skills": ["TypeScript", "React", "Node.js", "PostgreSQL", "Redis", "Datadog"]
+      "skills": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Datadog"
+      ]
     },
     {
       "company": "Beacon Commerce",
@@ -76,7 +94,13 @@
           "result": "Reduced failed checkouts and improved high-traffic stability.",
           "metric": "-35% checkout failures, +11% peak-hour conversion",
           "scope": "Merchant GMV surface of ~$180M/year",
-          "skills": ["Java", "Kotlin", "Kubernetes", "AWS", "Distributed Systems"]
+          "skills": [
+            "Java",
+            "Kotlin",
+            "Kubernetes",
+            "AWS",
+            "Distributed Systems"
+          ]
         },
         {
           "challenge": "Product and support teams lacked visibility into deployment risk.",
@@ -113,14 +137,18 @@
       "level": "advanced",
       "lastUsed": "2026-02",
       "tags": ["frontend", "backend"],
-      "evidence": ["Used across Northstar Labs onboarding and internal platform services"]
+      "evidence": [
+        "Used across Northstar Labs onboarding and internal platform services"
+      ]
     },
     {
       "name": "Product Analytics",
       "level": "advanced",
       "lastUsed": "2026-02",
       "tags": ["product", "experimentation", "data"],
-      "evidence": ["Defined event taxonomy and experiment readouts for activation funnel"]
+      "evidence": [
+        "Defined event taxonomy and experiment readouts for activation funnel"
+      ]
     },
     {
       "name": "User Research",
