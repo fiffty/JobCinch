@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/resume.schema.json",
+  "title": "Resume",
+  "description": "Schema for a master resume / CV with exhaustive source material",
+  "type": "object",
+  "$defs": {
+    "impactEntry": {
+      "type": "object",
+      "description": "A structured achievement that captures impact clearly",
+      "properties": {
+        "challenge": {
+          "type": "string",
+          "description": "Problem, opportunity, or context addressed"
+        },
+        "action": {
+          "type": "string",
+          "description": "What the candidate specifically did"
+        },
+        "result": {
+          "type": "string",
+          "description": "Outcome produced by the work"
+        },
+        "metric": {
+          "type": "string",
+          "description": "Quantified signal for the result (e.g. '+18% conversion', '-120ms p95')"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scale of impact (users, revenue, systems, org, etc.)"
+        },
+        "skills": {
+          "type": "array",
+          "description": "Skills directly applied in this achievement",
+          "items": { "type": "string" }
+        },
+        "links": {
+          "type": "array",
+          "description": "Optional links to demos, docs, or artifacts",
+          "items": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "skillEntry": {
+      "type": "object",
+      "description": "General skill entry with optional metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Skill name (tool, methodology, domain, or technical concept)"
+        },
+        "level": {
+          "type": "string",
+          "description": "Self-assessed proficiency or familiarity level"
+        },
+        "lastUsed": {
+          "type": "string",
+          "description": "Most recent usage date (YYYY or YYYY-MM)"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Optional tags for grouping/filtering during tailoring",
+          "items": { "type": "string" }
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Optional references that demonstrate this skill",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "significantItem": {
+      "type": "object",
+      "description": "Catch-all entry for important accomplishments outside core sections",
+      "properties": {
+        "title": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "description": "Free-form category, e.g. award, publication, talk, leadership, volunteer, patent"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Brief description of what this item is"
+        },
+        "impact": {
+          "type": "string",
+          "description": "Why this item matters professionally"
+        },
+        "date": {
+          "type": "string",
+          "description": "Relevant date (YYYY or YYYY-MM or YYYY-MM-DD)"
+        },
+        "links": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Supporting notes, references, or context",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique kebab-case identifier for the resume version (e.g. 'software-engineer-2026')"
+    },
+    "metaTitle": {
+      "type": "string",
+      "description": "App-facing display title for listing this resume; not part of printable resume content"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full legal name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Primary email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number (e.g. +1-555-123-4567)"
+    },
+    "location": {
+      "type": "object",
+      "description": "Current or preferred location",
+      "properties": {
+        "city": { "type": "string" },
+        "country": { "type": "string" },
+        "remote": {
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string", "enum": ["full", "hybrid", "on-site"] }
+          ],
+          "description": "Open to remote work"
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "description": "Professional online profiles",
+      "properties": {
+        "linkedin": { "type": "string", "format": "uri" },
+        "github": { "type": "string", "format": "uri" },
+        "portfolio": { "type": "string", "format": "uri" },
+        "other": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "url": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "description": "Professional summary or objective statement"
+    },
+    "experience": {
+      "type": "array",
+      "description": "Work experience entries, most recent first",
+      "items": {
+        "type": "object",
+        "properties": {
+          "company": { "type": "string" },
+          "jobTitle": { "type": "string" },
+          "startDate": {
+            "type": "string",
+            "description": "Start date (YYYY-MM or YYYY-MM-DD)"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date (YYYY-MM or YYYY-MM-DD); omit or empty for current role"
+          },
+          "city": { "type": "string" },
+          "country": { "type": "string" },
+          "remote": {
+            "oneOf": [
+              { "type": "boolean" },
+              { "type": "string", "enum": ["full", "hybrid", "on-site"] }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Short summary of the role"
+          },
+          "impactEntries": {
+            "type": "array",
+            "description": "Structured achievements with challenge, action, and outcome",
+            "items": { "$ref": "#/$defs/impactEntry" }
+          },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional free-form bullets (legacy/quick capture)"
+          },
+          "skills": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Technologies and skills used in this role"
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "description": "Educational background, most recent first",
+      "items": {
+        "type": "object",
+        "properties": {
+          "institution": { "type": "string" },
+          "degree": {
+            "type": "string",
+            "description": "e.g. Bachelor of Science, Master of Engineering"
+          },
+          "field": {
+            "type": "string",
+            "description": "Field of study / major"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date (YYYY or YYYY-MM)"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date (YYYY or YYYY-MM); omit or empty if in progress"
+          },
+          "gpa": { "type": "number", "description": "GPA (optional)" },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Relevant coursework, honors, or activities"
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "General skill list for all role types",
+      "items": { "$ref": "#/$defs/skillEntry" }
+    },
+    "projects": {
+      "type": "array",
+      "description": "Notable personal or open-source projects",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "link": { "type": "string", "format": "uri" },
+          "description": { "type": "string" },
+          "impactEntries": {
+            "type": "array",
+            "description": "Structured outcomes from this project",
+            "items": { "$ref": "#/$defs/impactEntry" }
+          },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "skills": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "description": "Professional certifications and licenses",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "issuer": { "type": "string" },
+          "issuedAt": {
+            "type": "string",
+            "description": "Issue date (YYYY-MM or YYYY-MM-DD)"
+          },
+          "expiresAt": {
+            "type": "string",
+            "description": "Expiry date if applicable"
+          },
+          "link": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "significantItems": {
+      "type": "array",
+      "description": "Important accomplishments that do not fit neatly in other sections",
+      "items": { "$ref": "#/$defs/significantItem" }
+    }
+  }
+}

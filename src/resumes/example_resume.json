@@ -1,0 +1,198 @@
+{
+  "id": "alex-kim-master-resume-2026",
+  "metaTitle": "Alex Kim - Master Resume",
+  "name": "Alex Kim",
+  "email": "alex.kim@example.com",
+  "phone": "+1-415-555-0198",
+  "location": {
+    "city": "San Francisco",
+    "country": "USA",
+    "remote": "full"
+  },
+  "links": {
+    "linkedin": "https://linkedin.com/in/alexkim",
+    "github": "https://github.com/alexkim",
+    "portfolio": "https://alexkim.dev",
+    "other": [
+      {
+        "label": "Dribbble",
+        "url": "https://dribbble.com/alexkim"
+      },
+      {
+        "label": "Medium",
+        "url": "https://medium.com/@alexkim"
+      }
+    ]
+  },
+  "summary": "Product-minded technologist with 9+ years of experience building software, leading cross-functional initiatives, and improving user outcomes across B2B and consumer products.",
+  "experience": [
+    {
+      "company": "Northstar Labs",
+      "jobTitle": "Staff Product Engineer",
+      "startDate": "2022-03",
+      "endDate": "",
+      "city": "San Francisco",
+      "country": "USA",
+      "remote": "hybrid",
+      "description": "Lead engineer for growth and onboarding surfaces used by small business customers.",
+      "impactEntries": [
+        {
+          "challenge": "Activation plateaued at 37% for new accounts despite increased ad spend.",
+          "action": "Designed and shipped a progressive onboarding flow with role-based paths, analytics instrumentation, and experiment framework support.",
+          "result": "Increased 30-day activation and reduced setup abandonment.",
+          "metric": "+14% activation, -22% onboarding drop-off over 2 quarters",
+          "scope": "Core onboarding used by ~120k new users/year",
+          "skills": ["TypeScript", "React", "Node.js", "A/B Testing", "Product Analytics"],
+          "links": ["https://alexkim.dev/case-study-onboarding"]
+        },
+        {
+          "challenge": "Dashboard p95 latency exceeded 900ms during weekday peaks.",
+          "action": "Introduced query batching, Redis-backed read-through caching, and a new service-level performance budget with CI checks.",
+          "result": "Improved dashboard responsiveness and reliability.",
+          "metric": "-61% p95 latency, +9 points customer satisfaction",
+          "scope": "Served 40k daily active users across 3 regions",
+          "skills": ["PostgreSQL", "Redis", "Performance Tuning", "Observability"]
+        }
+      ],
+      "highlights": [
+        "Mentored 5 engineers and created a technical design review rubric adopted by two teams.",
+        "Partnered with design and PM to define quarterly roadmap for growth platform."
+      ],
+      "skills": ["TypeScript", "React", "Node.js", "PostgreSQL", "Redis", "Datadog"]
+    },
+    {
+      "company": "Beacon Commerce",
+      "jobTitle": "Senior Software Engineer",
+      "startDate": "2019-01",
+      "endDate": "2022-02",
+      "city": "New York",
+      "country": "USA",
+      "remote": true,
+      "description": "Built platform capabilities for merchant checkout and internal tooling.",
+      "impactEntries": [
+        {
+          "challenge": "Checkout failures spiked during promotions and degraded conversion.",
+          "action": "Led migration from monolith checkout endpoint to fault-isolated services with idempotent payment retries.",
+          "result": "Reduced failed checkouts and improved high-traffic stability.",
+          "metric": "-35% checkout failures, +11% peak-hour conversion",
+          "scope": "Merchant GMV surface of ~$180M/year",
+          "skills": ["Java", "Kotlin", "Kubernetes", "AWS", "Distributed Systems"]
+        },
+        {
+          "challenge": "Product and support teams lacked visibility into deployment risk.",
+          "action": "Built a release health dashboard with deploy markers, error budgets, and customer-impact alerts.",
+          "result": "Faster detection and communication of incidents.",
+          "metric": "-42% MTTR, +27% incident detection speed",
+          "scope": "Used by engineering, product, and support organizations",
+          "skills": ["Grafana", "Prometheus", "Incident Response", "SRE"]
+        }
+      ],
+      "highlights": [
+        "Ran weekly architecture sessions and authored internal standards for API versioning."
+      ],
+      "skills": ["Java", "Kotlin", "AWS", "Kubernetes", "Grafana", "Prometheus"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Washington",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "2012",
+      "endDate": "2016",
+      "gpa": 3.8,
+      "highlights": [
+        "Teaching assistant for Human-Computer Interaction",
+        "Capstone project on collaborative design tooling"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "TypeScript",
+      "level": "advanced",
+      "lastUsed": "2026-02",
+      "tags": ["frontend", "backend"],
+      "evidence": ["Used across Northstar Labs onboarding and internal platform services"]
+    },
+    {
+      "name": "Product Analytics",
+      "level": "advanced",
+      "lastUsed": "2026-02",
+      "tags": ["product", "experimentation", "data"],
+      "evidence": ["Defined event taxonomy and experiment readouts for activation funnel"]
+    },
+    {
+      "name": "User Research",
+      "level": "intermediate",
+      "lastUsed": "2025-11",
+      "tags": ["ux", "discovery"],
+      "evidence": ["Co-led moderated interviews for onboarding redesign"]
+    },
+    {
+      "name": "Roadmapping",
+      "level": "advanced",
+      "lastUsed": "2026-01",
+      "tags": ["product", "leadership"],
+      "evidence": ["Owned quarterly planning for growth platform initiatives"]
+    },
+    {
+      "name": "AWS",
+      "level": "advanced",
+      "lastUsed": "2026-02",
+      "tags": ["cloud", "infrastructure"],
+      "evidence": ["Managed production services across multi-region workloads"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "FlowBoard",
+      "link": "https://github.com/alexkim/flowboard",
+      "description": "Open-source workflow board for product and design collaboration.",
+      "impactEntries": [
+        {
+          "challenge": "Small teams needed a lighter alternative to heavyweight project suites.",
+          "action": "Built real-time collaboration features and a plugin API for integrations.",
+          "result": "Project gained active usage and community contributions.",
+          "metric": "2.3k GitHub stars, 18 external contributors",
+          "scope": "Used by startups and student teams in 20+ countries",
+          "skills": ["React", "WebSockets", "PostgreSQL", "Open Source"]
+        }
+      ],
+      "highlights": [
+        "Wrote contributor guide and triage process that reduced issue response times."
+      ],
+      "skills": ["React", "TypeScript", "WebSockets", "PostgreSQL"]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Solutions Architect - Associate",
+      "issuer": "Amazon Web Services",
+      "issuedAt": "2024-06",
+      "expiresAt": "2027-06",
+      "link": "https://aws.amazon.com/certification/"
+    }
+  ],
+  "significantItems": [
+    {
+      "title": "Speaker at React Summit",
+      "kind": "talk",
+      "summary": "Presented on balancing product velocity with frontend platform quality.",
+      "impact": "Session was featured by organizers and reused in internal onboarding at two partner companies.",
+      "date": "2025-10",
+      "links": ["https://reactsummit.com"],
+      "tags": ["frontend", "leadership", "public-speaking"],
+      "evidence": ["Conference agenda listing", "Talk recording"]
+    },
+    {
+      "title": "Women in Tech Mentorship Program Lead",
+      "kind": "leadership",
+      "summary": "Organized a six-month mentorship cohort for early-career engineers and designers.",
+      "impact": "Improved retention and promotion readiness for participants.",
+      "date": "2024-12",
+      "tags": ["mentorship", "community", "career-development"],
+      "evidence": ["Program curriculum", "Participant feedback summaries"]
+    }
+  ]
+}

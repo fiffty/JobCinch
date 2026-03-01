@@ -1,7 +1,165 @@
 .app {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 5rem 2rem 2rem;
+}
+
+.app-nav {
+  position: fixed;
+  top: 3rem;
+  right: 4rem;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hamburger-btn {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: #1a1a1a;
+}
+
+.hamburger-btn span {
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+}
+
+.hamburger-menu {
+  margin-top: 0.5rem;
+  min-width: 150px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: #1a1a2e;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+.hamburger-menu a {
+  padding: 0.65rem 0.9rem;
+}
+
+.hamburger-menu a:hover {
+  background: rgba(100, 108, 255, 0.15);
+}
+
+.resumes-list {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-list-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  background: transparent;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.resume-list-item:hover {
+  border-color: #646cff;
+  background: rgba(100, 108, 255, 0.06);
+}
+
+.resume-list-item-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.resume-list-item-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.resume-list-item-sub {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.resume-list-item-arrow {
+  font-size: 1.2rem;
+  color: #444;
+  transition: color 0.15s;
+  line-height: 1;
+}
+
+.resume-list-item:hover .resume-list-item-arrow {
+  color: #646cff;
+}
+
+.resume-detail-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.resume-page {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 1 / 1.29;
+  background: #fff;
+  color: #111;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+}
+
+.resume-page-content {
   padding: 2rem;
+  line-height: 1.4;
+}
+
+.resume-page h1,
+.resume-page h2,
+.resume-page h3 {
+  margin-top: 0;
+}
+
+.resume-page h2 {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.resume-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.75rem;
+}
+
+.resume-header p,
+.resume-subline {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+.resume-block + .resume-block {
+  margin-top: 1rem;
 }
 
 table {
@@ -134,7 +292,9 @@ tbody td {
   font-size: 0.9rem;
   background: transparent;
   color: inherit;
-  transition: background-color 0.15s, border-color 0.15s;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
 }
 
 .modal-btn:hover {
@@ -176,7 +336,9 @@ tbody td {
   color: inherit;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: background-color 0.15s, border-color 0.15s;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
 }
 
 .currency-toggle button:hover {
@@ -190,6 +352,22 @@ tbody td {
 }
 
 @media (prefers-color-scheme: light) {
+  .resume-list-item {
+    border-color: #e0e0e0;
+  }
+
+  .resume-list-item:hover {
+    background: rgba(100, 108, 255, 0.05);
+  }
+
+  .resume-list-item-sub {
+    color: #777;
+  }
+
+  .resume-list-item-arrow {
+    color: #ccc;
+  }
+
   thead th {
     border-bottom-color: #ccc;
   }
@@ -221,5 +399,41 @@ tbody td {
 
   .currency-toggle button {
     border-color: #ccc;
+  }
+
+  .hamburger-btn {
+    border-color: #ccc;
+    background: #fff;
+  }
+
+  .hamburger-menu {
+    border-color: #ddd;
+    background: #fff;
+  }
+}
+
+@media print {
+  .app-nav,
+  .resume-detail-toolbar {
+    display: none !important;
+  }
+
+  .app {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resume-page {
+    width: 100%;
+    aspect-ratio: auto;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .resume-page-content {
+    padding: 0.5in;
   }
 }
