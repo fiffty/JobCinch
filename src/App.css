@@ -261,6 +261,63 @@ tbody td {
   margin: 0;
 }
 
+input.editable-date {
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.15rem 0.35rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+}
+
+.interviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.interview-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.remove-interview-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+
+.remove-interview-btn:hover {
+  color: #e33;
+}
+
+.add-interview-btn {
+  align-self: flex-start;
+  background: none;
+  border: 1px dashed #aaa;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.add-interview-btn:hover:not(:disabled) {
+  border-color: #666;
+  color: #333;
+}
+
+.add-interview-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .job-detail .people-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
