@@ -8,8 +8,9 @@ JobForge runs locally on your machine and is designed to work alongside AI codin
 
 ### For Developers
 
-1. Clone the repo and run `npm install`
-2. Run `npm run dev` to start the Vite dev server
+1. `npm install`
+2. `npm run dev`
+3. But you already knew that. Fork it. Add more features. The whole intention of building this was to have a tool tailored to my specific needs (e.g., comparing compensation across currencies). Build it your own!
 
 ### For Non-Technical Users
 
@@ -44,3 +45,4 @@ These are slash commands you can run in Cursor or Claude Code.
 - **`/add_job`** — Parses a job posting URL, extracts key details (company, title, salary, requirements, etc.), and saves them as a structured JSON file in `src/jobs/`.
 - **`/update_master_resume`** — Creates or updates your master resume (`src/resumes/master_resume.json`) from a resume file, raw text, or free-text instructions. Merges new data intelligently without losing existing entries.
 - **`/create_job_resume`** — Generates a tailored resume for a specific job by selecting and reordering content from your master resume to match the job's requirements. Then walks you through filling gaps by asking targeted questions about your experience.
+- **`/ask`** — Ask questions about your tracked jobs and resume. Compares jobs against your resume, highlights strengths and gaps, and suggests concrete next steps.
