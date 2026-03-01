@@ -1,8 +1,8 @@
-# JobForge
+# JobCinch
 
-JobForge is an AI-powered tool for job seekers that combines job tracking with resume building. Drop a link to a job posting and JobForge will parse and save it, letting you manage your applications and track their status in one place. For resumes, import your existing resume to build a master profile that accumulates all your experience, then use AI to generate tailored resumes optimized for specific job postings.
+JobCinch is an AI-powered tool for job seekers that combines job tracking with resume building. Drop a link to a job posting and JobCinch will parse and save it, letting you manage your applications and track their status in one place. For resumes, import your existing resume to build a master profile that accumulates all your experience, then use AI to generate tailored resumes optimized for specific job postings.
 
-JobForge runs locally on your machine and is designed to work alongside AI coding tools like Cursor and Claude Code. Rather than calling AI APIs directly, JobForge provides JSON schemas and ready-made prompts that you feed into your preferred AI tool to parse job postings, build your master resume, and generate tailored versions.
+JobCinch runs locally on your machine and is designed to work alongside AI coding tools like Cursor and Claude Code. Rather than calling AI APIs directly, JobCinch provides JSON schemas and ready-made prompts that you feed into your preferred AI tool to parse job postings, build your master resume, and generate tailored versions.
 
 ## How to Use
 
@@ -14,19 +14,19 @@ JobForge runs locally on your machine and is designed to work alongside AI codin
 
 ### For Non-Technical Users
 
-JobForge is a web app that runs on your own computer. Here's how to get it set up and start using it.
+JobCinch is a web app that runs on your own computer. Here's how to get it set up and start using it.
 
 #### Initial Setup
 
 You'll need two things installed on your computer before starting:
 
 - **Node.js** — the runtime that powers the app. Download it from [nodejs.org](https://nodejs.org) and install the LTS (Long Term Support) version. Follow the installer prompts with the default options.
-- **An AI coding tool** — JobForge is designed to be used with tools like [Cursor](https://www.cursor.com/) or [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview). These are apps that let you chat with an AI that can read and edit files on your computer. Install at least one of these.
+- **An AI coding tool** — JobCinch is designed to be used with tools like [Cursor](https://www.cursor.com/) or [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview). These are apps that let you chat with an AI that can read and edit files on your computer. Install at least one of these.
 
 Once Node.js is installed, open your terminal (on Mac, search for "Terminal" in Spotlight; on Windows, search for "Command Prompt" or "PowerShell") and run these commands:
 
 ```bash
-# Navigate to where you downloaded JobForge
+# Navigate to where you downloaded JobCinch
 cd path/to/trackjobs
 
 # Install dependencies (only needed once)
@@ -36,7 +36,7 @@ npm install
 npm run dev
 ```
 
-The terminal will show a local URL (usually `http://localhost:5173`). Open that in your browser and you'll see the JobForge interface.
+The terminal will show a local URL (usually `http://localhost:5173`). Open that in your browser and you'll see the JobCinch interface.
 
 ### Available ready-written prompts
 
