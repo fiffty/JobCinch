@@ -1,75 +1,46 @@
-# React + TypeScript + Vite
+# JobForge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JobForge is an AI-powered tool for job seekers that combines job tracking with resume building. Drop a link to a job posting and JobForge will parse and save it, letting you manage your applications and track their status in one place. For resumes, import your existing resume to build a master profile that accumulates all your experience, then use AI to generate tailored resumes optimized for specific job postings.
 
-Currently, two official plugins are available:
+JobForge runs locally on your machine and is designed to work alongside AI coding tools like Cursor and Claude Code. Rather than calling AI APIs directly, JobForge provides JSON schemas and ready-made prompts that you feed into your preferred AI tool to parse job postings, build your master resume, and generate tailored versions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to Use
 
-## React Compiler
+### For Developers
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+1. Clone the repo and run `npm install`
+2. Run `npm run dev` to start the Vite dev server
 
-Note: This will impact Vite dev & build performances.
+### For Non-Technical Users
 
-## Expanding the ESLint configuration
+JobForge is a web app that runs on your own computer. Here's how to get it set up and start using it.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+#### Initial Setup
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+You'll need two things installed on your computer before starting:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Node.js** — the runtime that powers the app. Download it from [nodejs.org](https://nodejs.org) and install the LTS (Long Term Support) version. Follow the installer prompts with the default options.
+- **An AI coding tool** — JobForge is designed to be used with tools like [Cursor](https://www.cursor.com/) or [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview). These are apps that let you chat with an AI that can read and edit files on your computer. Install at least one of these.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Once Node.js is installed, open your terminal (on Mac, search for "Terminal" in Spotlight; on Windows, search for "Command Prompt" or "PowerShell") and run these commands:
+
+```bash
+# Navigate to where you downloaded JobForge
+cd path/to/trackjobs
+
+# Install dependencies (only needed once)
+npm install
+
+# Start the app
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The terminal will show a local URL (usually `http://localhost:5173`). Open that in your browser and you'll see the JobForge interface.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Available ready-written prompts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+These are slash commands you can run in Cursor or Claude Code.
+
+- **`/add_job`** — Parses a job posting URL, extracts key details (company, title, salary, requirements, etc.), and saves them as a structured JSON file in `src/jobs/`.
+- **`/update_master_resume`** — Creates or updates your master resume (`src/resumes/master_resume.json`) from a resume file, raw text, or free-text instructions. Merges new data intelligently without losing existing entries.
+- **`/create_job_resume`** — Generates a tailored resume for a specific job by selecting and reordering content from your master resume to match the job's requirements. Then walks you through filling gaps by asking targeted questions about your experience.
