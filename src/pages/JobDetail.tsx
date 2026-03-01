@@ -2,7 +2,7 @@ import { useParams } from "wouter";
 import { Link } from "wouter";
 import { useJobStore } from "../store/jobStore";
 import { useCurrencyStore, getCurrencySymbol } from "../store/currencyStore";
-import type { ContactInfo } from "../types/job";
+import type { ContactInfo, JobStatus } from "../types/job";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + "T00:00:00");
@@ -12,6 +12,23 @@ function formatDate(dateStr: string): string {
     month: "long",
     day: "numeric",
   });
+}
+
+function EditableDate({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <input
+      type="date"
+      className="editable-date"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  );
 }
 
 function ContactSection({
@@ -37,6 +54,7 @@ function ContactSection({
 export default function JobDetail() {
   const { id } = useParams<{ id: string }>();
   const job = useJobStore((state) => state.getJobById(id));
+  const updateJobStatus = useJobStore((state) => state.updateJobStatus);
   const { displayCurrency, convertSalary } = useCurrencyStore();
 
   if (!job) {
@@ -49,6 +67,28 @@ export default function JobDetail() {
   }
 
   const { status } = job;
+
+  const updateField = (field: keyof JobStatus, value: string | string[]) => {
+    updateJobStatus(job.id, field, value);
+  };
+
+  const addInterview = () => {
+    const hasEmpty = status.interviewsAt.some((d) => !d);
+    if (hasEmpty) return;
+    updateField("interviewsAt", [...status.interviewsAt, ""]);
+  };
+
+  const updateInterview = (index: number, value: string) => {
+    const updated = status.interviewsAt.map((d, i) => (i === index ? value : d));
+    updateField("interviewsAt", updated);
+  };
+
+  const removeInterview = (index: number) => {
+    updateField(
+      "interviewsAt",
+      status.interviewsAt.filter((_, i) => i !== index)
+    );
+  };
 
   return (
     <div className="app job-detail">
@@ -64,18 +104,54 @@ export default function JobDetail() {
         <h2>Status Timeline</h2>
         <dl>
           <dt>Applied</dt>
-          <dd>{status.appliedAt ? formatDate(status.appliedAt) : "—"}</dd>
+          <dd>
+            <EditableDate
+              value={status.appliedAt}
+              onChange={(v) => updateField("appliedAt", v)}
+            />
+          </dd>
           <dt>Intro Call</dt>
-          <dd>{status.introCallAt ? formatDate(status.introCallAt) : "—"}</dd>
+          <dd>
+            <EditableDate
+              value={status.introCallAt}
+              onChange={(v) => updateField("introCallAt", v)}
+            />
+          </dd>
           <dt>Interviews</dt>
           <dd>
-            {status.interviewsAt.length > 0
-              ? status.interviewsAt.map(formatDate).join(", ")
-              : "—"}
+            <div className="interviews-list">
+              {status.interviewsAt.map((date, i) => (
+                <div key={i} className="interview-row">
+                  <EditableDate
+                    value={date}
+                    onChange={(v) => updateInterview(i, v)}
+                  />
+                  <button
+                    type="button"
+                    className="remove-interview-btn"
+                    onClick={() => removeInterview(i)}
+                    aria-label="Remove interview date"
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                className="add-interview-btn"
+                onClick={addInterview}
+                disabled={status.interviewsAt.some((d) => !d)}
+              >
+                + Add interview
+              </button>
+            </div>
           </dd>
           <dt>Offer Received</dt>
           <dd>
-            {status.receivedOfferAt ? formatDate(status.receivedOfferAt) : "—"}
+            <EditableDate
+              value={status.receivedOfferAt}
+              onChange={(v) => updateField("receivedOfferAt", v)}
+            />
           </dd>
         </dl>
       </section>
