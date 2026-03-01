@@ -1,55 +1,39 @@
 .app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 5rem 2rem 2rem;
+  padding: 4rem 2rem 2rem;
 }
 
 .app-nav {
   position: fixed;
-  top: 3rem;
-  right: 4rem;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 200;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.hamburger-btn {
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  padding: 0 10px;
-  border: 1px solid #555;
-  border-radius: 8px;
+  border-bottom: 1px solid #333;
   background: #1a1a1a;
 }
 
-.hamburger-btn span {
-  height: 2px;
-  width: 100%;
-  background: currentColor;
-}
-
-.hamburger-menu {
-  margin-top: 0.5rem;
-  min-width: 150px;
-  border: 1px solid #555;
-  border-radius: 8px;
-  background: #1a1a2e;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+.top-navbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
-  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.hamburger-menu a {
+.top-navbar a {
   padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.hamburger-menu a:hover {
-  background: rgba(100, 108, 255, 0.15);
+.top-navbar a:hover {
+  color: #fff;
+  border-bottom-color: #646cff;
 }
 
 .resumes-list {
@@ -525,14 +509,17 @@ input.editable-date {
     border-color: #ccc;
   }
 
-  .hamburger-btn {
-    border-color: #ccc;
+  .app-nav {
     background: #fff;
+    border-bottom-color: #ddd;
   }
 
-  .hamburger-menu {
-    border-color: #ddd;
-    background: #fff;
+  .top-navbar a {
+    color: #777;
+  }
+
+  .top-navbar a:hover {
+    color: #111;
   }
 }
 

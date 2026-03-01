@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Switch, Route, Link } from 'wouter';
 import JobsIndex from './pages/JobsIndex';
 import JobDetail from './pages/JobDetail';
@@ -7,35 +6,13 @@ import ResumeDetail from './pages/ResumeDetail';
 import './App.css';
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const closeMenu = () => setMenuOpen(false);
-
   return (
     <>
       <header className="app-nav">
-        <button
-          className="hamburger-btn"
-          type="button"
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-
-        {menuOpen && (
-          <nav className="hamburger-menu">
-            <Link href="/" onClick={closeMenu}>
-              Home
-            </Link>
-            <Link href="/resumes" onClick={closeMenu}>
-              Resumes
-            </Link>
-          </nav>
-        )}
+        <nav className="top-navbar">
+          <Link href="/">Jobs</Link>
+          <Link href="/resumes">Resumes</Link>
+        </nav>
       </header>
 
       <Switch>
