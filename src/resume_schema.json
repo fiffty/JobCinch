@@ -5,42 +5,6 @@
   "description": "Schema for a master resume / CV with exhaustive source material",
   "type": "object",
   "$defs": {
-    "impactEntry": {
-      "type": "object",
-      "description": "A structured achievement that captures impact clearly",
-      "properties": {
-        "challenge": {
-          "type": "string",
-          "description": "Problem, opportunity, or context addressed"
-        },
-        "action": {
-          "type": "string",
-          "description": "What the candidate specifically did"
-        },
-        "result": {
-          "type": "string",
-          "description": "Outcome produced by the work"
-        },
-        "metric": {
-          "type": "string",
-          "description": "Quantified signal for the result (e.g. '+18% conversion', '-120ms p95')"
-        },
-        "scope": {
-          "type": "string",
-          "description": "Scale of impact (users, revenue, systems, org, etc.)"
-        },
-        "skills": {
-          "type": "array",
-          "description": "Skills directly applied in this achievement",
-          "items": { "type": "string" }
-        },
-        "links": {
-          "type": "array",
-          "description": "Optional links to demos, docs, or artifacts",
-          "items": { "type": "string", "format": "uri" }
-        }
-      }
-    },
     "skillEntry": {
       "type": "object",
       "description": "General skill entry with optional metadata",
@@ -196,8 +160,8 @@
           },
           "impactEntries": {
             "type": "array",
-            "description": "Structured achievements with challenge, action, and outcome",
-            "items": { "$ref": "#/$defs/impactEntry" }
+            "description": "Achievement bullet points copied verbatim from the source",
+            "items": { "type": "string" }
           },
           "highlights": {
             "type": "array",
@@ -260,8 +224,8 @@
           "description": { "type": "string" },
           "impactEntries": {
             "type": "array",
-            "description": "Structured outcomes from this project",
-            "items": { "$ref": "#/$defs/impactEntry" }
+            "description": "Achievement bullet points copied verbatim from the source",
+            "items": { "type": "string" }
           },
           "highlights": {
             "type": "array",

@@ -138,13 +138,19 @@
 .resume-page h2,
 .resume-page h3 {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .resume-page h2 {
-  margin-top: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+}
+
+.resume-page h3 {
+  margin-bottom: 0.1rem;
 }
 
 .resume-header {
@@ -152,14 +158,55 @@
   padding-bottom: 0.75rem;
 }
 
+.resume-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.resume-contacts {
+  text-align: right;
+  flex-shrink: 0;
+}
+
 .resume-header p,
 .resume-subline {
-  margin: 0.25rem 0;
+  margin: 0.15rem 0;
   color: #444;
 }
 
+.resume-columns {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.resume-main {
+  flex: 2;
+  min-width: 0;
+}
+
+.resume-sidebar {
+  flex: 1;
+  min-width: 0;
+}
+
 .resume-block + .resume-block {
-  margin-top: 1rem;
+  margin-top: 0.6rem;
+}
+
+.resume-block p {
+  margin: 0.15rem 0;
+}
+
+.resume-block ul {
+  margin: 0.2rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.resume-block li {
+  margin-bottom: 0.1rem;
 }
 
 table {

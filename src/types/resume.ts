@@ -18,16 +18,6 @@ export interface ResumeLocation {
   remote?: RemotePreference;
 }
 
-export interface ImpactEntry {
-  challenge?: string;
-  action?: string;
-  result?: string;
-  metric?: string;
-  scope?: string;
-  skills?: string[];
-  links?: string[];
-}
-
 export interface ExperienceEntry {
   company?: string;
   jobTitle?: string;
@@ -37,7 +27,7 @@ export interface ExperienceEntry {
   country?: string;
   remote?: RemotePreference;
   description?: string;
-  impactEntries?: ImpactEntry[];
+  impactEntries?: string[];
   highlights?: string[];
   skills?: string[];
 }
@@ -64,7 +54,7 @@ export interface ProjectEntry {
   name?: string;
   link?: string;
   description?: string;
-  impactEntries?: ImpactEntry[];
+  impactEntries?: string[];
   highlights?: string[];
   skills?: string[];
 }
