@@ -222,6 +222,10 @@ export default function JobsIndex() {
       }),
       columnHelper.accessor('city', { header: 'City' }),
       columnHelper.accessor('country', { header: 'Country' }),
+      columnHelper.accessor('referrer', {
+        header: 'Referrer',
+        cell: (info) => info.getValue()?.name ?? '',
+      }),
       columnHelper.accessor((row) => getStatusLabel(row.status), {
         id: 'status',
         header: 'Status',
