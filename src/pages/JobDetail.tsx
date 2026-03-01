@@ -1,7 +1,8 @@
-import { useParams } from "wouter";
+import { useParams, useLocation } from "wouter";
 import { Link } from "wouter";
 import { useJobStore } from "../store/jobStore";
 import { useCurrencyStore, getCurrencySymbol } from "../store/currencyStore";
+import { DeleteConfirmModal, useDeleteWithConfirmation } from "../components/DeleteConfirmModal";
 import type { ContactInfo, JobStatus } from "../types/job";
 
 function EditableDate({
@@ -45,7 +46,15 @@ export default function JobDetail() {
   const { id } = useParams<{ id: string }>();
   const job = useJobStore((state) => state.getJobById(id));
   const updateJobStatus = useJobStore((state) => state.updateJobStatus);
+  const deleteJob = useJobStore((state) => state.deleteJob);
   const { displayCurrency, convertSalary } = useCurrencyStore();
+  const [, navigate] = useLocation();
+
+  const { showModal, requestDelete, confirmDelete, cancelDelete } =
+    useDeleteWithConfirmation(() => {
+      deleteJob(job!.id);
+      navigate("/");
+    });
 
   if (!job) {
     return (
@@ -261,6 +270,20 @@ export default function JobDetail() {
           />
         </div>
       </section>
+
+      <section className="delete-section">
+        <button type="button" className="delete-btn" onClick={requestDelete}>
+          Delete Job
+        </button>
+      </section>
+
+      {showModal && (
+        <DeleteConfirmModal
+          itemLabel="this job"
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
     </div>
   );
 }

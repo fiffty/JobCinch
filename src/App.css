@@ -472,6 +472,99 @@ input.editable-date {
   cursor: pointer;
 }
 
+/* Delete button & confirmation modal */
+
+.delete-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+}
+
+.delete-btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #dc3545;
+  border-radius: 6px;
+  background: transparent;
+  color: #dc3545;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.delete-btn:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+.delete-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-modal {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+}
+
+.delete-modal h3 {
+  margin: 0 0 0.5rem;
+}
+
+.delete-modal p {
+  margin: 0 0 1rem;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.delete-modal-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.delete-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.delete-modal-actions button {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background: transparent;
+  color: inherit;
+}
+
+.delete-modal-actions button:hover {
+  border-color: #646cff;
+}
+
+.delete-modal-actions .delete-btn {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.delete-modal-actions .delete-btn:hover {
+  background: #c82333;
+}
+
 @media (prefers-color-scheme: light) {
   .resume-list-item {
     border-color: #e0e0e0;
@@ -526,6 +619,27 @@ input.editable-date {
     border-color: #ccc;
   }
 
+  .delete-section {
+    border-top-color: #ddd;
+  }
+
+  .delete-modal {
+    background: #fff;
+    border-color: #ddd;
+  }
+
+  .delete-modal p {
+    color: #666;
+  }
+
+  .delete-modal-checkbox {
+    color: #666;
+  }
+
+  .delete-modal-actions button {
+    border-color: #ccc;
+  }
+
   .app-nav {
     background: #fff;
     border-bottom-color: #ddd;
@@ -546,7 +660,8 @@ input.editable-date {
   }
 
   .app-nav,
-  .resume-detail-toolbar {
+  .resume-detail-toolbar,
+  .delete-section {
     display: none !important;
   }
 

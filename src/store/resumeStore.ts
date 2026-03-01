@@ -10,9 +10,15 @@ const resumes: Resume[] = Object.values(resumeModules).map((mod) => mod.default)
 interface ResumeStore {
   resumes: Resume[];
   getResumeById: (id: string) => Resume | undefined;
+  deleteResume: (resumeId: string) => void;
 }
 
-export const useResumeStore = create<ResumeStore>(() => ({
+export const useResumeStore = create<ResumeStore>((set, get) => ({
   resumes,
-  getResumeById: (id: string) => resumes.find((resume) => resume.id === id),
+  getResumeById: (id: string) => get().resumes.find((resume) => resume.id === id),
+  deleteResume: (resumeId) => {
+    set((state) => ({
+      resumes: state.resumes.filter((r) => r.id !== resumeId),
+    }));
+  },
 }));

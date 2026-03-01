@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { useResumeStore } from "../store/resumeStore";
+import { DeleteConfirmModal, useDeleteWithConfirmation } from "../components/DeleteConfirmModal";
 import type { Resume } from "../types/resume";
 
 function formatDate(value: string | undefined): string {
@@ -237,6 +238,14 @@ function renderResume(resume: Resume) {
 export default function ResumeDetail() {
   const { id } = useParams<{ id: string }>();
   const resume = useResumeStore((state) => state.getResumeById(id));
+  const deleteResume = useResumeStore((state) => state.deleteResume);
+  const [, navigate] = useLocation();
+
+  const { showModal, requestDelete, confirmDelete, cancelDelete } =
+    useDeleteWithConfirmation(() => {
+      deleteResume(resume!.id);
+      navigate("/resumes");
+    });
 
   if (!resume) {
     return (
@@ -257,6 +266,20 @@ export default function ResumeDetail() {
       </div>
 
       <div className="resume-page">{renderResume(resume)}</div>
+
+      <section className="delete-section">
+        <button type="button" className="delete-btn" onClick={requestDelete}>
+          Delete Resume
+        </button>
+      </section>
+
+      {showModal && (
+        <DeleteConfirmModal
+          itemLabel="this resume"
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
     </div>
   );
 }

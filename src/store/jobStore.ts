@@ -31,6 +31,7 @@ interface JobStore {
   jobs: Job[];
   getJobById: (id: string) => Job | undefined;
   updateJobStatus: (jobId: string, field: keyof JobStatus, value: string | string[]) => void;
+  deleteJob: (jobId: string) => void;
 }
 
 export const useJobStore = create<JobStore>((set, get) => ({
@@ -50,6 +51,15 @@ export const useJobStore = create<JobStore>((set, get) => ({
     const currentOverrides = loadStatusOverrides();
     const existing = currentOverrides[jobId] ?? {};
     currentOverrides[jobId] = { ...existing, [field]: value };
+    saveStatusOverrides(currentOverrides);
+  },
+  deleteJob: (jobId) => {
+    set((state) => ({
+      jobs: state.jobs.filter((j) => j.id !== jobId),
+    }));
+    // Clean up status overrides
+    const currentOverrides = loadStatusOverrides();
+    delete currentOverrides[jobId];
     saveStatusOverrides(currentOverrides);
   },
 }));
