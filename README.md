@@ -24,12 +24,19 @@ You'll need two things installed on your computer before starting:
 
 - **Node.js** — the runtime that powers the app. Download it from [nodejs.org](https://nodejs.org) and install the LTS (Long Term Support) version. Follow the installer prompts with the default options.
 - **An AI coding tool** — JobCinch is designed to be used with tools like [Cursor](https://www.cursor.com/) or [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview). These are apps that let you chat with an AI that can read and edit files on your computer. Install at least one of these.
+- **Get familiar with the terminal** - You will at least need to know how to navigate between folders in the terminal. This[Terminal Cheat Sheet article](https://terminalcheatsheet.com/guides/navigate-terminal) is a good resource.
 
 Once Node.js is installed, open your terminal (on Mac, search for "Terminal" in Spotlight; on Windows, search for "Command Prompt" or "PowerShell") and run these commands:
 
 ```bash
-# Navigate to where you downloaded JobCinch
-cd path/to/trackjobs
+# Navigate to where you want to install JobCinch
+cd path/to/install
+
+# Download the code
+git clone git@github.com:fiffty/JobCinch.git
+
+# Navigate to downloaded folder
+cd JobCinch
 
 # Install dependencies (only needed once)
 npm install
