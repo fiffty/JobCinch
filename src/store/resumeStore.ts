@@ -1,11 +1,29 @@
 import { create } from 'zustand';
 import type { Resume } from '../types/resume';
 
+const DELETED_KEY = 'deletedResumeIds';
+
+function loadDeletedResumeIds(): Set<string> {
+  try {
+    const raw = localStorage.getItem(DELETED_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function saveDeletedResumeIds(ids: Set<string>) {
+  localStorage.setItem(DELETED_KEY, JSON.stringify([...ids]));
+}
+
 const resumeModules = import.meta.glob('../resumes/*.json', {
   eager: true,
 }) as Record<string, { default: Resume }>;
 
-const resumes: Resume[] = Object.values(resumeModules).map((mod) => mod.default);
+const deletedResumeIds = loadDeletedResumeIds();
+const resumes: Resume[] = Object.values(resumeModules)
+  .map((mod) => mod.default)
+  .filter((r) => !deletedResumeIds.has(r.id!));
 
 interface ResumeStore {
   resumes: Resume[];
@@ -20,5 +38,8 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
     set((state) => ({
       resumes: state.resumes.filter((r) => r.id !== resumeId),
     }));
+    const ids = loadDeletedResumeIds();
+    ids.add(resumeId);
+    saveDeletedResumeIds(ids);
   },
 }));

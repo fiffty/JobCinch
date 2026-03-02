@@ -49,7 +49,7 @@ export function DeleteConfirmModal({
     <div className="delete-modal-overlay" onClick={onCancel}>
       <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
         <h3>Delete {itemLabel}?</h3>
-        <p>This action cannot be undone.</p>
+        <p>This will hide {itemLabel} from the list. To permanently delete it, remove the corresponding JSON file from the project.</p>
         <label className="delete-modal-checkbox">
           <input
             type="checkbox"
