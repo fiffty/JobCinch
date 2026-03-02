@@ -149,7 +149,14 @@ export default function JobsIndex() {
   const jobs = useJobStore((state) => state.jobs);
   const [, setLocation] = useLocation();
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(() => {
+    try {
+      const stored = localStorage.getItem('jobsColumnFilters');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   const [modalTarget, setModalTarget] = useState<string | null>(null);
 
   const {
@@ -167,6 +174,10 @@ export default function JobsIndex() {
     const unique = [...new Set(jobs.map((j) => j.currency))];
     setCurrencies(unique);
   }, [jobs, setCurrencies]);
+
+  useEffect(() => {
+    localStorage.setItem('jobsColumnFilters', JSON.stringify(columnFilters));
+  }, [columnFilters]);
 
   const handleCurrencyClick = useCallback(
     (currency: string | null) => {
