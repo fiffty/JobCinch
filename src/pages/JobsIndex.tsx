@@ -322,6 +322,9 @@ export default function JobsIndex() {
       )}
 
       <div className="filters-row">
+        {columnFilters.length > 0 && (
+          <button onClick={() => setColumnFilters([])}>Reset Filters</button>
+        )}
         {(['city', 'remote', 'country', 'status'] as const).map((key) => (
           <select
             key={key}
