@@ -491,7 +491,8 @@ input.editable-date {
   margin-bottom: 1rem;
 }
 
-.filters-row select {
+.filters-row select,
+.filters-row input[type='text'] {
   padding: 0.35rem 0.6rem;
   border: 1px solid #555;
   border-radius: 6px;
@@ -658,7 +659,8 @@ input.editable-date {
     border-color: #ccc;
   }
 
-  .filters-row select {
+  .filters-row select,
+  .filters-row input[type='text'] {
     border-color: #ccc;
   }
 

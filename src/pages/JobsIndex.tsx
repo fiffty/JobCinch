@@ -325,6 +325,19 @@ export default function JobsIndex() {
         {columnFilters.length > 0 && (
           <button onClick={() => setColumnFilters([])}>Reset Filters</button>
         )}
+        <input
+          type="text"
+          placeholder="Filter by company..."
+          value={(columnFilters.find((f) => f.id === 'company')?.value as string) ?? ''}
+          onChange={(e) => {
+            const val = e.target.value;
+            setColumnFilters((prev) =>
+              val
+                ? [...prev.filter((f) => f.id !== 'company'), { id: 'company', value: val }]
+                : prev.filter((f) => f.id !== 'company'),
+            );
+          }}
+        />
         {(['city', 'remote', 'country', 'status'] as const).map((key) => (
           <select
             key={key}
